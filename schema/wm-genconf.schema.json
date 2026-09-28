@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "wm-genconf canonical configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "desktop"],
+  "properties": {
+    "version": {"type": "integer", "const": 1},
+    "desktop": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "terminal": {"type": "string", "minLength": 1},
+        "launcher": {"type": "string", "minLength": 1},
+        "appearance": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "gaps": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "inner": {"type": "integer", "minimum": 0},
+                "outer": {"type": "integer", "minimum": 0}
+              }
+            },
+            "border_width": {"type": "integer", "minimum": 0}
+          }
+        },
+        "keybindings": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "terminal": {"$ref": "#/$defs/binding"},
+            "launcher": {"$ref": "#/$defs/binding"},
+            "close_window": {"$ref": "#/$defs/binding"}
+          }
+        },
+        "compositor": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "backend": {"enum": ["hyprland", "mango", "niri", "sway", "river", "qtile"]},
+            "layout": {"type": "string"}
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "binding": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9+_ -]+$"
+    }
+  }
+}
