@@ -1,0 +1,17 @@
+version: 1
+
+desktop:
+  terminal: foot
+  launcher: fuzzel
+  appearance:
+    gaps:
+      inner: 6
+      outer: 10
+    border_width: 2
+  keybindings:
+    terminal: Super+Return
+    launcher: Super+D
+    close_window: Super+Q
+  compositor:
+    backend: mango
+    layout: scroller
